@@ -114,7 +114,7 @@ abline(v = mean_1000, col = 'green')
 legend('center', c('Sample Means', 'Theoretical Mean', 'Average of Sample Means'), lty = c(1,1,1), col = c('black', 'red', 'green'))
 ```
 
-![](README_files/figure-html/mean_figure-1.png)<!-- -->
+![](Simulation_files/figure-html/mean_figure-1.png)<!-- -->
 
 Qualitatively, it is clear that as the number of samples goes up, the distribution of sample means starts to resemble a normal distribution centered around the theoretical mean more and more. It should also be noted that with 1000 samples the average of the sample means is so close to the theoretical value the two lines are literally right on top of each other (average sample mean = 5.0169241).
 
@@ -142,7 +142,7 @@ abline(v = var_1000, col = 'green')
 legend('center', c('Sample Variances', 'Theoretical Variance', 'Average of Sample Variances'), lty = c(1,1,1), col = c('black', 'red', 'green'))
 ```
 
-![](README_files/figure-html/var_figure-1.png)<!-- -->
+![](Simulation_files/figure-html/var_figure-1.png)<!-- -->
 
 Similar to the sample means, as the number of samples increases the distribution of sample variances seems to approach that of a normal distribution. The average of the sample variances also approaches the theoretical value. Again, the values are so close for the 1000-sample case (average sample variance = 25.7320481) the two lines seem to overlap each other. The convergence of average sample mean and average sample variance to the theoretical values is expected, since they are both unbiased statistics.
 
@@ -151,9 +151,11 @@ Similar to the sample means, as the number of samples increases the distribution
 This section redoubles effort to provide more qualitative evidence that supports the CLT while also verifying the second part of the theorem. That is, the distribution of the sample mean is a normal distribution with $Var[x] = \frac{\sigma^2(x)}{n}$ where $\sigma^2(x)$ is the true variance of the population. 
 
 
+
+
 ```r
 qqnorm(sample_means_1000)
 qqline(sample_means_1000)
 ```
 
-![](README_files/figure-html/normality-1.png)<!-- -->
+![](Simulation_files/figure-html/qq-1.png)<!-- -->
