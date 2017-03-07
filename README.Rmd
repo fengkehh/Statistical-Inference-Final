@@ -1,8 +1,15 @@
-# README
-Keh-Harng Feng  
-March 6, 2017  
+---
+title: "README"
+author: "Keh-Harng Feng"
+date: "March 6, 2017"
+output: 
+    html_document:
+        keep_md: TRUE
+---
 
-
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
 ## Part 1: Simulation Exercise
 
@@ -22,7 +29,6 @@ where \lambda is the only parameter of the distribution.  It is often referred t
 This part of the report uses a computer simulation in R to generate a set of random data following the exponential distribution in order to test the **central limit theorem**  (CLT).
 
 ### Data Generation
-
-```r
+```{r data}
 lambda <- 0.2
 ```
