@@ -1,11 +1,11 @@
-# Statistical Inference Project Part 1: Exponential Distribution and Central Limit Theorem
+# Part 1: Simulation
 Keh-Harng Feng  
 March 6, 2017  
 
 
 
 ## Overview
-A computer simulation of random variables following an exponetial distribution is carried out. The means of the simulated variable are computed and plotted. The result follows the prediction using the Central Limit Theorem.
+A computer simulation of random variables following an exponetial distribution is carried out. The means of the simulated variable are computed and plotted. The result follows the prediction from the Central Limit Theorem.
 
 ## Introduction
 
@@ -49,37 +49,36 @@ For the purpose of this report, all simulations for the exponential distribution
 lambda <- 0.2
 ```
 
-Three matrices with sizes 40 x 10, 40 x 100 and 40 x 1000 are created by filling each column with a random sample of 40 measurements that follow the exponential distribution for a number of samples corresponding to the number of columns in each matrix:
+Each sample is set to have n = 5, 25 and 125 measurements. Three matrices with sizes n x 1000 are created by filling each column with a random sample that follows the exponential distribution for 1000 samples:
 
 
 ```r
+n <- 5
+
 # Setting fixed seed first for reproducibility.
 set.seed(123)
 
-samples_10 <- matrix(data = rexp(40*10, rate = lambda), nrow = 40, ncol = 10)
+samples_5 <- matrix(data = rexp(n*1000, rate = lambda), nrow = n, ncol = 1000)
 
 set.seed(321)
-samples_100 <- matrix(data = rexp(40*100, rate = lambda), nrow = 40, ncol = 100)
+samples_25 <- matrix(data = rexp(n^2*1000, rate = lambda), nrow = n^2, ncol = 1000)
 
 set.seed(132)
-samples_1000 <- matrix(data = rexp(40*1000, rate = lambda), nrow = 40, ncol = 1000)
+samples_125 <- matrix(data = rexp(n^3*1000, rate = lambda), nrow = n^3, ncol = 1000)
 ```
 
-The sample means and sample standard variances are computed as follows:
+The sample means and sample variances are computed as follows:
 
 
 ```r
-sample_means_10 <- apply(samples_10, 2, mean)
-sample_vars_10 <- apply(samples_10, 2, var)
-sample_sds_10 <- sqrt(samples_10)
+sample_means_5 <- apply(samples_5, 2, mean)
+sample_vars_5 <- apply(samples_5, 2, var)
 
-sample_means_100 <- apply(samples_100, 2, mean)
-sample_vars_100 <- apply(samples_100, 2, var)
-sample_sds_100 <- sqrt(samples_100)
+sample_means_25 <- apply(samples_25, 2, mean)
+sample_vars_25 <- apply(samples_25, 2, var)
 
-sample_means_1000 <- apply(samples_1000, 2, mean)
-sample_vars_1000 <- apply(samples_1000, 2, var)
-sample_sds_1000 <- sqrt(samples_1000)
+sample_means_125 <- apply(samples_125, 2, mean)
+sample_vars_125 <- apply(samples_125, 2, var)
 ```
 
 ## Sample Mean versus Theoretical Mean
@@ -92,85 +91,90 @@ mean_t <- 1/lambda
 var_t <- 1/lambda^2
 ```
 
-The numerical value of the theoretical mean is 5. This is superimposed on the distribution of sample means below:
+The numerical value of the theoretical mean is **5**. This is superimposed on the distribution of sample means below:
 
 
 ```r
 par(mfrow = c(1,3))
-hist(sample_means_10)
+hist(sample_means_5, main = '')
 abline(v = mean_t, col = 'red')
-mean_10 <- mean(sample_means_10)
-abline(v = mean_10, col = 'green')
+mean_5 <- mean(sample_means_5)
+abline(v = mean_5, col = 'green')
 
-hist(sample_means_100, main = 'Sample Mean Distribution')
+hist(sample_means_25, main = 'Sample Mean Distribution')
 abline(v = mean_t, col = 'red')
-mean_100 <- mean(sample_means_100)
-abline(v = mean_100, col = 'green')
+mean_25 <- mean(sample_means_25)
+abline(v = mean_25, col = 'green')
 
-hist(sample_means_1000)
+hist(sample_means_125, main = '')
 abline(v = mean_t, col = 'red')
-mean_1000 <- mean(sample_means_1000)
-abline(v = mean_1000, col = 'green')
+mean_125 <- mean(sample_means_125)
+abline(v = mean_125, col = 'green')
 legend('center', c('Sample Means', 'Theoretical Mean', 'Average of Sample Means'), lty = c(1,1,1), col = c('black', 'red', 'green'))
 ```
 
 ![](Simulation_files/figure-html/mean_figure-1.png)<!-- -->
 
-Qualitatively, it is clear that as the number of samples goes up, the distribution of sample means starts to resemble a normal distribution centered around the theoretical mean more and more. It should also be noted that with 1000 samples the average of the sample means is so close to the theoretical value the two lines are literally right on top of each other (average sample mean = 5.0169241).
+Qualitatively, it is clear from the range of the x-axis that as the sample size goes up, the distribution of sample means starts to group around the theoretical mean more tightly (average sample mean = 5.0097381).
 
 ## Sample Variance versus Theoretical Variance
 
-The numerical value of the theoretical variance is 25. Once again this is superimposed on the distribution of sample variances below:
+The numerical value of the theoretical variance is **25**. Once again this is superimposed on the distribution of sample variances below:
 
 
 ```r
 par(mfrow = c(1,3))
-hist(sample_vars_10)
+hist(sample_vars_5, main = '')
 abline(v = var_t, col = 'red')
-var_10 <- mean(sample_vars_10)
-abline(v = var_10, col = 'green')
+var_5 <- mean(sample_vars_5)
+abline(v = var_5, col = 'green')
 
-hist(sample_vars_100, main = 'Sample Variance Distribution')
+hist(sample_vars_25, main = 'Sample Variance Distribution')
 abline(v = var_t, col = 'red')
-var_100 <- mean(sample_vars_100)
-abline(v = var_100, col = 'green')
+var_25 <- mean(sample_vars_25)
+abline(v = var_25, col = 'green')
 
-hist(sample_vars_1000)
+hist(sample_vars_125, main = '')
 abline(v = var_t, col = 'red')
-var_1000 <- mean(sample_vars_1000)
-abline(v = var_1000, col = 'green')
+var_125 <- mean(sample_vars_125)
+abline(v = var_125, col = 'green')
 legend('center', c('Sample Variances', 'Theoretical Variance', 'Average of Sample Variances'), lty = c(1,1,1), col = c('black', 'red', 'green'))
 ```
 
 ![](Simulation_files/figure-html/var_figure-1.png)<!-- -->
 
-Similar to the sample means, as the number of samples increases the distribution of sample variances seems to approach that of a normal distribution. The average of the sample variances also approaches the theoretical value. Again, the values are so close for the 1000-sample case (average sample variance = 25.7320481) the two lines seem to overlap each other. The convergence of average sample mean and average sample variance to the theoretical values is expected, since they are both unbiased statistics.
+Similar to the sample means, as the sample size increases the sample variances become more clustered around the theoretical value (average sample variance = 25.0474321). The convergence of average sample mean and average sample variance to the theoretical values is expected, since they are both unbiased statistics.
 
 ## Distribution Identification
 
-This section redoubles effort to provide more qualitative evidence that supports the CLT while also verifying the second part of the theorem. That is, the distribution of the sample mean is a normal distribution with $Var[x] = \frac{\sigma^2(x)}{n}$ where $\sigma^2(x)$ is the true variance of the population. 
+This section redoubles effort to provide more qualitative evidence that supports the CLT while also verifying the second part of the theorem. That is, the distribution of the sample mean is a normal distribution with $Var[x] = \frac{\sigma^2(x)}{n}$ where $\sigma^2(x)$ is the true variance of the population and n is the sample size. 
 
-A histogram of the probability density of the sample means from 1000 samples is shown below. A plot of the normal distribution with mean = 5 and variance = 0.625 is superimposed on top.
+A histogram of the probability density of the sample means from size 125 samples is shown below. A plot of the normal distribution with mean = 5 and variance = 5 is superimposed on top.
 
 ```r
 # creating reference normal distribution
-x = seq(from = min(sample_means_1000), to = max(sample_means_1000), length.out = 100)
-ref_means = dnorm(x, mean = mean_t, sd = sqrt(var_t/40))
+x = seq(from = min(sample_means_125), to = max(sample_means_125), length.out = 100)
+ref_means = dnorm(x, mean = mean_t, sd = sqrt(var_t/125))
 
 par(mfrow = c(1, 1))
 
-hist(sample_means_1000, breaks = 20, prob = TRUE)
+hist(sample_means_125, breaks = 20, prob = TRUE, main = 'Sample Mean Density Distribution (1000 Size 125 Samples)', col = 'green')
 lines(x, ref_means)
+legend('topright', c('Sample Density', 'Reference Normal Density'), lty = c(1, 1), col = c('green', 'black'))
 ```
 
 ![](Simulation_files/figure-html/norm_compare-1.png)<!-- -->
 
+The good agreement in shapes indicates that the variance in the sample means indeed follows $Var[X] = \frac{\sigma^2(x)}{n}$ where n = 125 is the number of measurements per sample as predicted by CLT.
 
+Another tool to check the normality of the distribution is the quantile-quantile (QQ) plot, where the quantile a data point belongs to in the empirical distribution is checked against its quantile in a normal distribution. If the empirical distribution matches up well with the normal distribution, most of its points should lie on the diagonal. A QQ plot showing how the sample mean distribution matches up with a normal distribution is shown below.
 
 
 ```r
-qqnorm(sample_means_1000)
-qqline(sample_means_1000)
+qqnorm(sample_means_125, main = 'QQ plot of Sample Means (1000 size 125 samples) vs Normal Distribution')
+qqline(sample_means_125)
 ```
 
 ![](Simulation_files/figure-html/qq-1.png)<!-- -->
+
+Since most points are either directly on the diagonal or fairly close to it, the distribution of sample means with 1000 samples is most likely a normal distribution, as predicted by CLT.
