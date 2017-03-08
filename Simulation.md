@@ -97,17 +97,17 @@ The numerical value of the theoretical mean is 5. This is superimposed on the di
 
 ```r
 par(mfrow = c(1,3))
-hist(sample_means_10, xlab = 'Sample Mean Distribution', main = '10 samples')
+hist(sample_means_10)
 abline(v = mean_t, col = 'red')
 mean_10 <- mean(sample_means_10)
 abline(v = mean_10, col = 'green')
 
-hist(sample_means_100, xlab = 'Sample Mean Distribution', main = '100 samples')
+hist(sample_means_100, main = 'Sample Mean Distribution')
 abline(v = mean_t, col = 'red')
 mean_100 <- mean(sample_means_100)
 abline(v = mean_100, col = 'green')
 
-hist(sample_means_1000, xlab = 'Sample Mean Distribution', main = '1000 samples')
+hist(sample_means_1000)
 abline(v = mean_t, col = 'red')
 mean_1000 <- mean(sample_means_1000)
 abline(v = mean_1000, col = 'green')
@@ -125,17 +125,17 @@ The numerical value of the theoretical variance is 25. Once again this is superi
 
 ```r
 par(mfrow = c(1,3))
-hist(sample_vars_10, xlab = 'Sample Variance Distribution', main = '10 samples')
+hist(sample_vars_10)
 abline(v = var_t, col = 'red')
 var_10 <- mean(sample_vars_10)
 abline(v = var_10, col = 'green')
 
-hist(sample_vars_100, xlab = 'Sample Variance Distribution', main = '100 samples')
+hist(sample_vars_100, main = 'Sample Variance Distribution')
 abline(v = var_t, col = 'red')
 var_100 <- mean(sample_vars_100)
 abline(v = var_100, col = 'green')
 
-hist(sample_vars_1000, xlab = 'Sample Variance Distribution', main = '1000 samples')
+hist(sample_vars_1000)
 abline(v = var_t, col = 'red')
 var_1000 <- mean(sample_vars_1000)
 abline(v = var_1000, col = 'green')
@@ -149,6 +149,21 @@ Similar to the sample means, as the number of samples increases the distribution
 ## Distribution Identification
 
 This section redoubles effort to provide more qualitative evidence that supports the CLT while also verifying the second part of the theorem. That is, the distribution of the sample mean is a normal distribution with $Var[x] = \frac{\sigma^2(x)}{n}$ where $\sigma^2(x)$ is the true variance of the population. 
+
+A histogram of the probability density of the sample means from 1000 samples is shown below. A plot of the normal distribution with mean = 5 and variance = 0.625 is superimposed on top.
+
+```r
+# creating reference normal distribution
+x = seq(from = min(sample_means_1000), to = max(sample_means_1000), length.out = 100)
+ref_means = dnorm(x, mean = mean_t, sd = sqrt(var_t/40))
+
+par(mfrow = c(1, 1))
+
+hist(sample_means_1000, breaks = 20, prob = TRUE)
+lines(x, ref_means)
+```
+
+![](Simulation_files/figure-html/norm_compare-1.png)<!-- -->
 
 
 
