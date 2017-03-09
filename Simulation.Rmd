@@ -6,7 +6,7 @@ output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, tidy = FALSE)
 ```
 
 ## Overview
@@ -112,7 +112,8 @@ hist(sample_means_125, main = '')
 abline(v = mean_t, col = 'red')
 mean_125 <- mean(sample_means_125)
 abline(v = mean_125, col = 'green')
-legend('center', c('Sample Means', 'Theoretical Mean', 'Avg Sample Means'), lty = c(1,1,1), col = c('black', 'red', 'green'), bg = 'white')
+legend('center', c('Sample Means', 'Theoretical Mean', 'Avg Sample Means'), 
+       lty = c(1,1,1), col = c('black', 'red', 'green'), bg = 'white')
 ```
 
 Qualitatively, it is clear from the range of the x-axis that as the sample size goes up, the distribution of sample means starts to group around the theoretical mean more tightly (average sample mean = `r mean_125`).
@@ -137,7 +138,8 @@ hist(sample_vars_125, main = '')
 abline(v = var_t, col = 'red')
 var_125 <- mean(sample_vars_125)
 abline(v = var_125, col = 'green')
-legend('center', c('Sample Variances', 'Theoretical Variance', 'Avg Sample Variances'), lty = c(1,1,1), col = c('black', 'red', 'green'), bg = 'white')
+legend('center', c('Sample Variances', 'Theoretical Variance', 'Avg Sample Variances'), 
+       lty = c(1,1,1), col = c('black', 'red', 'green'), bg = 'white')
 ```
 
 Similar to the sample means, as the sample size increases the sample variances become more clustered around the theoretical value (average sample variance = `r var_125`). The convergence of average sample mean and average sample variance to the theoretical values is expected, since they are both unbiased statistics.
@@ -154,9 +156,11 @@ ref_means = dnorm(x, mean = mean_t, sd = sqrt(var_t/125))
 
 par(mfrow = c(1, 1))
 
-hist(sample_means_125, breaks = 20, prob = TRUE, main = 'Sample Mean Density Distribution (1000 Size 125 Samples)', col = 'green')
+hist(sample_means_125, breaks = 20, prob = TRUE, 
+     main = 'Sample Mean Density Distribution (1000 Size 125 Samples)', col = 'green')
 lines(x, ref_means)
-legend('topright', c('Sample Density', 'Reference Normal Density'), lty = c(1, 1), col = c('green', 'black'))
+legend('topright', c('Sample Density', 'Reference Normal Density'), lty = c(1, 1), 
+       col = c('green', 'black'))
 
 ```
 
@@ -165,7 +169,8 @@ The good agreement in shapes indicates that the variance in the sample means ind
 Another tool to check the normality of the distribution is the quantile-quantile (QQ) plot, where the quantile a data point belongs to in the empirical distribution is checked against its quantile in a normal distribution. If the empirical distribution matches up well with the normal distribution, most of its points should lie on the diagonal. A QQ plot showing how the sample mean distribution matches up with a normal distribution is shown below.
 
 ```{r qq}
-qqnorm(sample_means_125, main = 'QQ plot of Sample Means (1000 size 125 samples) vs Normal Distribution')
+qqnorm(sample_means_125, 
+       main = 'QQ plot of Sample Means (1000 size 125 samples) vs Normal Distribution')
 qqline(sample_means_125)
 
 ```
