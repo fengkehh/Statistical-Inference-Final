@@ -131,4 +131,4 @@ group_VC <- c(VC_2, VC_1, VC_0.5)
 t.test(group_OJ, group_VC, alternative = 'greater', conf.level = 0.95)$p.value
 ```
 
-Since p-value is once again smaller than the traditional cutoff value at 0.05, the null hypothesis is rejected. Orange juice is found to increase teeth length more effectively compared to asorbic acid in general. However, notice that in Section 3 a comparison has already been made between VC 2 and OJ 2 and the null hypothesis is not rejected in that case. Therefore it is needs to be mentioned that the higher effectiveness of orange juice is only significant at dosages lower than 2 mg/day.
+Since p-value is once again smaller than the traditional cutoff value at 0.05, the null hypothesis is rejected. Orange juice is found to increase teeth length more effectively compared to asorbic acid in general. However, notice that in Section 3 a comparison has already been made between VC 2 and OJ 2 and the null hypothesis is not rejected in that case. Therefore it needs to be mentioned that the higher effectiveness of orange juice is only significant at dosages lower than 2 mg/day.
