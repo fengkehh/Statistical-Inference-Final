@@ -3,8 +3,7 @@ title: 'Part 2: Inferential Data Analysis'
 author: "Keh-Harng Feng"
 date: "March 7, 2017"
 output: 
-    html_document:
-        keep_md: TRUE
+    pdf_document:
         fig_caption: TRUE
 ---
 
@@ -35,7 +34,7 @@ Without additional information, it is reasonable to assume that the guinea pigs 
 
 The data is factored into six groups for each supplement type and each dosage. The mean tooth length under each supplement types and each dosage is shown in Figure 1 below.
 
-```{r panel_plot, fig.cap = '**Figure 1**: Mean tooth length from each supplement type and dosage.'}
+```{r panel_plot, fig.cap = 'Mean tooth length from each supplement type and dosage.'}
 
 group_extract <- function(supp_str, dose) {
     return(ToothGrowth$len[(ToothGrowth$supp == supp_str) & (ToothGrowth$dose == dose)])
@@ -75,27 +74,9 @@ In other words, the alternative hypothesis is having 2 mg/day of vitamin C from 
 
 ## 3. Hypothesis Test
 
-Variances and sample sizes of each group is determined as follows:
-```{r limited_var}
-var_VC_2 <- var(VC_2)
-var_OJ_2 <- var(OJ_2)
-var_VC_1 <- var(VC_1)
-var_OJ_1 <- var(OJ_1)
-var_VC_0.5 <- var(VC_0.5)
-var_OJ_0.5 <- var(OJ_0.5)
-
-n_VC_2 <- length(VC_2)
-n_OJ_2 <- length(OJ_2)
-n_VC_1 <- length(VC_1)
-n_OJ_1 <- length(OJ_1)
-n_VC_0.5 <- length(VC_0.5)
-n_OJ_0.5 <- length(OJ_0.5)
-
-```
-
 P values of one sided T-tests between the average of VC 2 and averages of the other groups are presented below with a confidence level of 0.95:
 
-```{r limited_t_test, tidy = FALSE, fig.cap = '**Figure 2**: Log of P-values from one-sided T-test (x > y) between VC 2 and other groups. Cutoff at P-value = log(0.05) is drawn as the red line.'}
+```{r limited_t_test, tidy = FALSE, fig.cap = 'Log of P-values from one-sided T-test (x > y) between VC 2 and other groups. Cutoff at P-value = log(0.05) is drawn as the red line.'}
 
 pvals <- c(t.test(VC_2, OJ_2, alternative = 'greater', conf.level = 0.95)$p.value,
            t.test(VC_2, VC_1, alternative = 'greater', conf.level = 0.95)$p.value,

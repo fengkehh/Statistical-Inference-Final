@@ -2,9 +2,7 @@
 title: "Part 1: Simulation"
 author: "Keh-Harng Feng"
 date: "March 6, 2017"
-output: 
-    html_document:
-        keep_md: TRUE
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
@@ -22,10 +20,10 @@ $$
 f(x) = 
 \begin{cases}
     \lambda e^{- \lambda x}, & x \ge 0\\
-    0, & x\lt 0
+    0, & x < 0
 \end{cases}
 $$
-where \lambda is the only parameter of the distribution.  It is often referred to as the *rate*. 
+where $\lambda$ is the only parameter of the distribution.  It is often referred to as the *rate*. 
 
 The theoretical expected value or mean of the distribution can be found by evaluating the improper integral of the pdf from x = 0 to x = $\infty$ using integration by parts:
 
@@ -114,7 +112,7 @@ hist(sample_means_125, main = '')
 abline(v = mean_t, col = 'red')
 mean_125 <- mean(sample_means_125)
 abline(v = mean_125, col = 'green')
-legend('center', c('Sample Means', 'Theoretical Mean', 'Average of Sample Means'), lty = c(1,1,1), col = c('black', 'red', 'green'))
+legend('center', c('Sample Means', 'Theoretical Mean', 'Avg Sample Means'), lty = c(1,1,1), col = c('black', 'red', 'green'), bg = 'white')
 ```
 
 Qualitatively, it is clear from the range of the x-axis that as the sample size goes up, the distribution of sample means starts to group around the theoretical mean more tightly (average sample mean = `r mean_125`).
@@ -139,7 +137,7 @@ hist(sample_vars_125, main = '')
 abline(v = var_t, col = 'red')
 var_125 <- mean(sample_vars_125)
 abline(v = var_125, col = 'green')
-legend('center', c('Sample Variances', 'Theoretical Variance', 'Average of Sample Variances'), lty = c(1,1,1), col = c('black', 'red', 'green'))
+legend('center', c('Sample Variances', 'Theoretical Variance', 'Avg Sample Variances'), lty = c(1,1,1), col = c('black', 'red', 'green'), bg = 'white')
 ```
 
 Similar to the sample means, as the sample size increases the sample variances become more clustered around the theoretical value (average sample variance = `r var_125`). The convergence of average sample mean and average sample variance to the theoretical values is expected, since they are both unbiased statistics.
